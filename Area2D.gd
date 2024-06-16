@@ -1,5 +1,6 @@
 extends Area2D
 
+var is_following_parent := true
 var is_mouse_entered := false
 var dragging := false
 var mouse_start:Vector2
@@ -21,9 +22,14 @@ func _physics_process(delta):
 	if dragging:
 		var mouse_now := get_viewport().get_mouse_position()
 		mouse_now = mouse_now.clamp(Vector2(0,0),get_viewport().size)
-		var window_pos_diff := mouse_now - mouse_start
-		position = start_pos + window_pos_diff
-	if (position-Vector2(33,0)).abs() < Vector2(33,33):
-		position=Vector2(33,0)
-	
+		position = start_pos + (mouse_now - mouse_start)/get_parent().zoom
+		is_following_parent = false
+		if (position-Vector2(65,0)).abs() < Vector2(65,65):
+			is_following_parent=true
+			get_parent().redraw_path(false)
+		else:
+			get_parent().redraw_path()
+	if is_following_parent:
+		position=Vector2(65,0)
+		
 

@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://dwb5ifuh8tu4p"]
+
+[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_peoiq"]
+[ext_resource type="Texture2D" uid="uid://4506fxackaey" path="res://icon.svg" id="2_52wwk"]
+[ext_resource type="Script" path="res://Path2D.gd" id="3_tvxfn"]
+[ext_resource type="Script" path="res://Area2D.gd" id="4_f1va1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yb2vh"]
+size = Vector2(130, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rshj"]
+size = Vector2(65, 65)
+
+[sub_resource type="Curve2D" id="Curve2D_hl34a"]
+_data = {
+"points": PackedVector2Array(-262.064, 3.77976, 200, 0, 65, 0, -200, 0, 248.204, 2.51984, 0, 0)
+}
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pavmr"]
+
+[node name="Block" type="CharacterBody2D"]
+input_pickable = true
+script = ExtResource("1_peoiq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_52wwk")
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+offset_left = -65.0
+offset_top = -65.0
+offset_right = 65.0
+offset_bottom = 65.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yb2vh")
+
+[node name="DragArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DragArea"]
+shape = SubResource("RectangleShape2D_6rshj")
+
+[node name="Path2D" type="Path2D" parent="."]
+visible = false
+curve = SubResource("Curve2D_hl34a")
+script = ExtResource("3_tvxfn")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(65, 0)
+script = ExtResource("4_f1va1")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_52wwk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_pavmr")
+
+[connection signal="mouse_entered" from="DragArea" to="." method="_on_drag_area_mouse_entered"]
+[connection signal="mouse_exited" from="DragArea" to="." method="_on_drag_area_mouse_exited"]

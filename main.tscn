@@ -1,57 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://dd7kpml6vme3t"]
+[gd_scene load_steps=4 format=3 uid="uid://dd7kpml6vme3t"]
 
-[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_3eq1o"]
-[ext_resource type="Texture2D" uid="uid://4506fxackaey" path="res://icon.svg" id="2_5oq12"]
-[ext_resource type="Script" path="res://Path2D.gd" id="2_7wkjo"]
-[ext_resource type="Script" path="res://Area2D.gd" id="3_eevj6"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yb2vh"]
-size = Vector2(65, 65)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rshj"]
-
-[sub_resource type="Curve2D" id="Curve2D_hl34a"]
-_data = {
-"points": PackedVector2Array(-262.064, 3.77976, 200, 0, 30, 0, -200, 0, 248.204, 2.51984, 0, 0)
-}
-point_count = 2
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_pavmr"]
+[ext_resource type="PackedScene" uid="uid://dwb5ifuh8tu4p" path="res://block.tscn" id="1_aegk8"]
+[ext_resource type="Script" path="res://main.gd" id="1_xqeji"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="2_f748d"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_xqeji")
 
-[node name="Block" type="CharacterBody2D" parent="."]
-position = Vector2(604, 155)
-input_pickable = true
-script = ExtResource("1_3eq1o")
-
-[node name="Sprite2D" type="Sprite2D" parent="Block"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_5oq12")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Block"]
-shape = SubResource("RectangleShape2D_yb2vh")
-
-[node name="DragArea" type="Area2D" parent="Block"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Block/DragArea"]
-shape = SubResource("RectangleShape2D_6rshj")
-
-[node name="Path2D" type="Path2D" parent="Block"]
-curve = SubResource("Curve2D_hl34a")
-script = ExtResource("2_7wkjo")
-
-[node name="Area2D" type="Area2D" parent="Block"]
-position = Vector2(33, 0)
-script = ExtResource("3_eevj6")
+[node name="Block" parent="." instance=ExtResource("1_aegk8")]
 metadata/_edit_group_ = true
 
-[node name="Sprite2D2" type="Sprite2D" parent="Block/Area2D"]
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("2_5oq12")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Block/Area2D"]
-shape = SubResource("CircleShape2D_pavmr")
-
-[connection signal="mouse_entered" from="Block/DragArea" to="Block" method="_on_drag_area_mouse_entered"]
-[connection signal="mouse_exited" from="Block/DragArea" to="Block" method="_on_drag_area_mouse_exited"]
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_f748d")
