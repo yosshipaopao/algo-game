@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdrxjlb5vuh46"]
+
+[ext_resource type="PackedScene" uid="uid://dd7kpml6vme3t" path="res://main.tscn" id="1_pa0yk"]
+
+[node name="Base" type="Node2D"]
+
+[node name="CanvasLayer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1148.0
+offset_bottom = 645.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer"]
+size = Vector2i(1148, 645)
+size_2d_override_stretch = true
+
+[node name="Node2D" parent="CanvasLayer/SubViewport" instance=ExtResource("1_pa0yk")]
