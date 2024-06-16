@@ -8,7 +8,6 @@
 script = ExtResource("1_xqeji")
 
 [node name="Block" parent="." instance=ExtResource("1_aegk8")]
-metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("2_f748d")

@@ -32,4 +32,3 @@ func _physics_process(delta):
 	if is_following_parent:
 		position=Vector2(65,0)
 		
-
