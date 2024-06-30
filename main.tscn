@@ -11,3 +11,5 @@ script = ExtResource("1_xqeji")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("2_f748d")
+
+[editable path="Block"]

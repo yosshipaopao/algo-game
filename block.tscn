@@ -1,15 +1,14 @@
 [gd_scene load_steps=9 format=3 uid="uid://dwb5ifuh8tu4p"]
 
 [ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_peoiq"]
-[ext_resource type="Texture2D" uid="uid://4506fxackaey" path="res://icon.svg" id="2_52wwk"]
+[ext_resource type="Texture2D" uid="uid://jj2647cnncgy" path="res://icon.svg" id="2_52wwk"]
 [ext_resource type="Script" path="res://Path2D.gd" id="3_tvxfn"]
 [ext_resource type="Script" path="res://Area2D.gd" id="4_f1va1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yb2vh"]
 size = Vector2(130, 130)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rshj"]
-size = Vector2(65, 65)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1ffs"]
 
 [sub_resource type="Curve2D" id="Curve2D_hl34a"]
 _data = {
@@ -22,24 +21,52 @@ point_count = 2
 [node name="Block" type="CharacterBody2D"]
 input_pickable = true
 script = ExtResource("1_peoiq")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_52wwk")
-
-[node name="Panel" type="Panel" parent="."]
-visible = false
-offset_left = -65.0
-offset_top = -65.0
-offset_right = 65.0
-offset_bottom = 65.0
+Title = "Title"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_yb2vh")
 
-[node name="DragArea" type="Area2D" parent="."]
+[node name="Container" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -65.0
+offset_top = -65.0
+offset_right = 65.0
+offset_bottom = 65.0
+mouse_filter = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DragArea"]
-shape = SubResource("RectangleShape2D_6rshj")
+[node name="Panel" type="Panel" parent="Container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_s1ffs")
+
+[node name="GridContainer" type="VBoxContainer" parent="Container/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Title" type="Label" parent="Container/Panel/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Title"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="Container/Panel/GridContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 1
 
 [node name="Path2D" type="Path2D" parent="."]
 visible = false
@@ -58,5 +85,5 @@ texture = ExtResource("2_52wwk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_pavmr")
 
-[connection signal="mouse_entered" from="DragArea" to="." method="_on_drag_area_mouse_entered"]
-[connection signal="mouse_exited" from="DragArea" to="." method="_on_drag_area_mouse_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
