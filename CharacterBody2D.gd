@@ -1,5 +1,5 @@
 @tool
-class_name BlockNode extends CharacterBody2D
+class_name BlockNode extends Node2D
 
 @onready var path_2d = $Path2D
 @onready var area_2d = $Area2D
@@ -18,26 +18,10 @@ class_name BlockNode extends CharacterBody2D
 var zoom: Vector2:
 	get: return get_parent().zoom
 
-var is_mouse_drag_area_enterd := false
 var dragging := false
 var mouse_start: Vector2
 var start_pos := Vector2.ZERO
 var start_path_pos: Vector2
-
-func _on_mouse_entered() -> void: is_mouse_drag_area_enterd = true
-func _on_mouse_exited() -> void: is_mouse_drag_area_enterd = false
-
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if is_mouse_drag_area_enterd&&event.is_pressed()&&!area_2d.is_mouse_entered:
-			mouse_start = get_viewport().get_mouse_position()
-			start_pos = position
-			start_path_pos = area_2d.global_position
-			dragging = true
-		else:
-			dragging = false
-			if reset_pos:
-				position = Vector2.ZERO
 
 func _physics_process(_delta: float) -> void:
 	if dragging&&!Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
@@ -59,3 +43,17 @@ func redraw_path(is_show: bool=true) -> void:
 	if path_2d.curve.get_point_position(1) != area_2d.position:
 		path_2d.curve.set_point_position(1, area_2d.position)
 		path_2d.queue_redraw()
+
+
+func _on_container_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT:
+		if event.is_pressed():
+			get_parent().move_child(self,get_parent().get_child_count()-1)
+			mouse_start = get_viewport().get_mouse_position()
+			start_pos = position
+			start_path_pos = area_2d.global_position
+			dragging = true
+		else:
+			dragging = false
+			if reset_pos:
+				position = Vector2.ZERO
