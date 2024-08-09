@@ -1,8 +1,6 @@
 @tool
 class_name BlockNode extends Node2D
 
-@onready var path_2d = $Path2D
-@onready var area_2d = $Area2D
 @onready var title := %Title
 
 @export var Title := "":
@@ -11,9 +9,10 @@ class_name BlockNode extends Node2D
 	get:
 		return title.text
 @export var moveable := true
-@export var path_moveable := true
 @export var reset_pos := false
 @export var limit_viewport := true
+
+signal moved(pos:Vector2)
 
 var zoom: Vector2:
 	get: return get_parent().zoom
@@ -33,17 +32,7 @@ func _physics_process(_delta: float) -> void:
 		if limit_viewport:
 			mouse_now = mouse_now.clamp(Vector2(0, 0), get_viewport().size)
 		position = start_pos + (mouse_now - mouse_start) / zoom
-		if !area_2d.is_following_parent:
-			area_2d.global_position = start_path_pos
-			path_2d.queue_redraw()
-			path_2d.curve.set_point_position(1, area_2d.position)
-
-func redraw_path(is_show: bool=true) -> void:
-	path_2d.visible = is_show
-	if path_2d.curve.get_point_position(1) != area_2d.position:
-		path_2d.curve.set_point_position(1, area_2d.position)
-		path_2d.queue_redraw()
-
+		moved.emit(global_position)
 
 func _on_container_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT:
@@ -51,7 +40,6 @@ func _on_container_gui_input(event: InputEvent) -> void:
 			get_parent().move_child(self,get_parent().get_child_count()-1)
 			mouse_start = get_viewport().get_mouse_position()
 			start_pos = position
-			start_path_pos = area_2d.global_position
 			dragging = true
 		else:
 			dragging = false
