@@ -63,8 +63,6 @@ mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_cvybw")
 metadata/_edit_use_anchors_ = true
 
-[connection signal="moved" from="." to="Path2D" method="_on_block_moved"]
 [connection signal="moved" from="." to="connection" method="_on_block_moved"]
 [connection signal="gui_input" from="Container" to="." method="_on_container_gui_input"]
-[connection signal="moved" from="connection" to="Path2D" method="_on_connection_moved"]
 [connection signal="gui_input" from="connection/Panel" to="connection" method="_on_panel_gui_input"]

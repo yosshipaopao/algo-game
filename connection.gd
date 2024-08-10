@@ -10,7 +10,6 @@ var start_pos: Vector2
 
 var locked_position := following_position
 
-signal moved(pos:Vector2)
 
 func _on_panel_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -26,9 +25,8 @@ func _physics_process(_delta: float) -> void:
 		var mouse_now := get_viewport().get_mouse_position()
 		mouse_now = mouse_now.clamp(Vector2(0, 0), get_viewport().size)
 		position = start_pos + (mouse_now - mouse_start) / get_parent().zoom
-		moved.emit(position)
 		is_following_parent = false
-		if (position - Vector2(65, 0)).abs() < Vector2(65, 65):
+		if (position - Vector2(65, 0)).length()< Vector2(65, 65).length():
 			is_following_parent = true
 		locked_position = global_position
 
