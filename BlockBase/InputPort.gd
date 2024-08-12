@@ -4,7 +4,7 @@ class_name InputPort extends Node2D
 
 var connect_to : Plug
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not connect_to and to_local(get_global_mouse_position()).length() < 30 and Input.is_action_just_released("click"):
 		if main.dragging_connection:
 			if main.dragging_connection.request_connect(self):

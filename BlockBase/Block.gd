@@ -1,4 +1,4 @@
-class_name BlockNode extends Node2D
+class_name Block extends Node2D
 
 @onready var title := %Title
 

@@ -12,10 +12,7 @@ script = ExtResource("2_f748d")
 
 [node name="Block" parent="." instance=ExtResource("1_aegk8")]
 position = Vector2(211, -73)
-Title = ""
 
 [node name="Block2" parent="." instance=ExtResource("1_aegk8")]
-Title = ""
 
 [node name="Block3" parent="." instance=ExtResource("1_aegk8")]
-Title = ""

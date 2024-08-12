@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dtaob72r7g2y6"]
 
 [ext_resource type="Script" path="res://BlockBase/Path2D.gd" id="1_gvcge"]
-[ext_resource type="Script" path="res://BlockBase/Plug.gd" id="2_14m7o"]
+[ext_resource type="Script" path="res://BlockBase/PlugPoint.gd" id="2_14m7o"]
 [ext_resource type="Texture2D" uid="uid://jj2647cnncgy" path="res://icon.svg" id="3_ew0rs"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cvybw"]
