@@ -1,17 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwb5ifuh8tu4p"]
+[gd_scene load_steps=9 format=3 uid="uid://dwb5ifuh8tu4p"]
 
-[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_peoiq"]
+[ext_resource type="Script" path="res://Block.gd" id="1_peoiq"]
 [ext_resource type="Texture2D" uid="uid://jj2647cnncgy" path="res://icon.svg" id="2_52wwk"]
 [ext_resource type="Script" path="res://Path2D.gd" id="3_tvxfn"]
-[ext_resource type="Script" path="res://connection.gd" id="4_f0l8r"]
+[ext_resource type="Script" path="res://Plug.gd" id="4_f0l8r"]
+[ext_resource type="Script" path="res://input_port.gd" id="5_6yguq"]
 
-[sub_resource type="Curve2D" id="Curve2D_hl34a"]
+[sub_resource type="Curve2D" id="Curve2D_gdo5f"]
 _data = {
 "points": PackedVector2Array(-262.064, 3.77976, 200, 0, 65, 0, -200, 0, 248.204, 2.51984, 0, 0)
 }
 point_count = 2
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cvybw"]
+texture = ExtResource("2_52wwk")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4ie3a"]
 texture = ExtResource("2_52wwk")
 
 [node name="Block" type="Node2D"]
@@ -44,14 +48,16 @@ layout_mode = 2
 mouse_filter = 1
 
 [node name="Path2D" type="Path2D" parent="."]
-curve = SubResource("Curve2D_hl34a")
+curve = SubResource("Curve2D_gdo5f")
 script = ExtResource("3_tvxfn")
 
-[node name="connection" type="Node2D" parent="."]
+[node name="Plug" type="Node2D" parent="."]
+z_index = 1
 position = Vector2(65, 0)
 script = ExtResource("4_f0l8r")
 
-[node name="Panel" type="Panel" parent="connection"]
+[node name="Panel" type="Panel" parent="Plug"]
+z_index = 1
 offset_left = -10.0
 offset_top = -10.0
 offset_right = 10.0
@@ -63,6 +69,20 @@ mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_cvybw")
 metadata/_edit_use_anchors_ = true
 
-[connection signal="moved" from="." to="connection" method="_on_block_moved"]
+[node name="InputPort" type="Node2D" parent="."]
+position = Vector2(-65, 0)
+script = ExtResource("5_6yguq")
+
+[node name="Panel" type="Panel" parent="InputPort"]
+visible = false
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_4ie3a")
+
+[connection signal="moved" from="." to="Plug" method="_on_block_moved"]
 [connection signal="gui_input" from="Container" to="." method="_on_container_gui_input"]
-[connection signal="gui_input" from="connection/Panel" to="connection" method="_on_panel_gui_input"]
+[connection signal="gui_input" from="Plug/Panel" to="Plug" method="_on_panel_gui_input"]
+[connection signal="mouse_entered" from="InputPort/Panel" to="InputPort" method="_on_panel_mouse_entered"]
+[connection signal="mouse_exited" from="InputPort/Panel" to="InputPort" method="_on_panel_mouse_exited"]

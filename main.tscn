@@ -1,13 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://dd7kpml6vme3t"]
 
-[ext_resource type="PackedScene" uid="uid://dwb5ifuh8tu4p" path="res://block.tscn" id="1_aegk8"]
-[ext_resource type="Script" path="res://main.gd" id="1_xqeji"]
+[ext_resource type="PackedScene" uid="uid://dwb5ifuh8tu4p" path="res://Block.tscn" id="1_aegk8"]
+[ext_resource type="Script" path="res://Main.gd" id="1_r45e5"]
 [ext_resource type="Script" path="res://Camera2D.gd" id="2_f748d"]
 
-[node name="Node2D" type="Node2D"]
-script = ExtResource("1_xqeji")
+[node name="Main" type="Node2D"]
+script = ExtResource("1_r45e5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("2_f748d")
 
+[node name="Block2" parent="." instance=ExtResource("1_aegk8")]
+
 [node name="Block" parent="." instance=ExtResource("1_aegk8")]
+position = Vector2(211, -73)
