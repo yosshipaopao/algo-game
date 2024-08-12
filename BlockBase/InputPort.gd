@@ -12,4 +12,5 @@ func _process(delta: float) -> void:
 				connect_to.disconnect_port.connect(disconnect_port)
 
 func disconnect_port()->void:
+	connect_to.disconnect_port.disconnect(disconnect_port)
 	connect_to = null

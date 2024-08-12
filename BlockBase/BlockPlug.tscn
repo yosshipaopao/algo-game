@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtaob72r7g2y6"]
+
+[ext_resource type="Script" path="res://BlockBase/Path2D.gd" id="1_gvcge"]
+[ext_resource type="Script" path="res://BlockBase/Plug.gd" id="2_14m7o"]
+[ext_resource type="Texture2D" uid="uid://jj2647cnncgy" path="res://icon.svg" id="3_ew0rs"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cvybw"]
+texture = ExtResource("3_ew0rs")
+
+[node name="Plug" type="Path2D"]
+position = Vector2(65, 0)
+script = ExtResource("1_gvcge")
+
+[node name="Point" type="Node2D" parent="."]
+z_index = 1
+script = ExtResource("2_14m7o")
+
+[node name="Panel" type="Panel" parent="Point"]
+z_index = 1
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+pivot_offset = Vector2(10, 10)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_cvybw")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="gui_input" from="Point/Panel" to="Point" method="_on_panel_gui_input"]
