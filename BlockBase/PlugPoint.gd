@@ -36,7 +36,7 @@ func _process(_delta: float) -> void:
 		position = start_pos + (mouse_now - mouse_start) / get_viewport().get_camera_2d().zoom
 	
 func request_connect(input_port:InputPort)->bool:
-	if not connect_to:
+	if not connect_to and get_parent().plug_mode == input_port.plug_mode:
 		get_parent().remove_child(self)
 		input_port.add_child(self)
 		position = Vector2.ZERO

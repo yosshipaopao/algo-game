@@ -1,8 +1,5 @@
 class_name Block extends Node2D
 
-@onready var title := %Title
-
-@export var Title := ""
 @export var moveable := true
 @export var reset_pos := false
 @export var limit_viewport := true

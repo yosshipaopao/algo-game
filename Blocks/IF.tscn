@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://di7715ygpeb1g"]
+
+[ext_resource type="PackedScene" uid="uid://dwb5ifuh8tu4p" path="res://BlockBase/Block.tscn" id="1_xbj0e"]
+[ext_resource type="PackedScene" uid="uid://hj4jdn7rwud5" path="res://BlockBase/BlockPort.tscn" id="2_xbfe5"]
+[ext_resource type="PackedScene" uid="uid://dtaob72r7g2y6" path="res://BlockBase/BlockPlug.tscn" id="3_6f3sk"]
+
+[node name="Block" instance=ExtResource("1_xbj0e")]
+
+[node name="Label" type="Label" parent="Container" index="0"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "If"
+
+[node name="ProcessPort" parent="." index="1" instance=ExtResource("2_xbfe5")]
+position = Vector2(0, -65)
+plug_mode = 1
+
+[node name="TruePlug" parent="." index="2" instance=ExtResource("3_6f3sk")]
+position = Vector2(-33, 65)
+plug_mode = 1
+
+[node name="FalsePlug" parent="." index="3" instance=ExtResource("3_6f3sk")]
+position = Vector2(33, 65)
+plug_mode = 1

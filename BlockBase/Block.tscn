@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwb5ifuh8tu4p"]
+[gd_scene load_steps=3 format=3 uid="uid://dwb5ifuh8tu4p"]
 
 [ext_resource type="Script" path="res://BlockBase/Block.gd" id="1_peoiq"]
-[ext_resource type="PackedScene" uid="uid://dtaob72r7g2y6" path="res://BlockBase/BlockPlug.tscn" id="2_avlnr"]
-[ext_resource type="PackedScene" uid="uid://hj4jdn7rwud5" path="res://BlockBase/BlockPort.tscn" id="3_84jlo"]
+[ext_resource type="Theme" uid="uid://crn4tcjm4da5d" path="res://themes/Block.tres" id="2_jeaor"]
 
 [node name="Block" type="Node2D"]
 script = ExtResource("1_peoiq")
@@ -14,26 +13,7 @@ offset_right = 65.0
 offset_bottom = 65.0
 pivot_offset = Vector2(65, 65)
 mouse_filter = 1
+theme = ExtResource("2_jeaor")
 metadata/_edit_use_anchors_ = true
-
-[node name="GridContainer" type="VBoxContainer" parent="Container"]
-layout_mode = 2
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Title" type="Label" parent="Container/GridContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Title"
-horizontal_alignment = 1
-
-[node name="Control" type="Control" parent="Container/GridContainer"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-mouse_filter = 1
-
-[node name="Plug" parent="." instance=ExtResource("2_avlnr")]
-
-[node name="InputPort" parent="." instance=ExtResource("3_84jlo")]
 
 [connection signal="gui_input" from="Container" to="." method="_on_container_gui_input"]

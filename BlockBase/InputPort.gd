@@ -1,5 +1,7 @@
 class_name InputPort extends Node2D
 
+
+@export_enum("variable","process") var plug_mode := 0
 @onready var main : Main = get_parent().get_parent()
 
 var connect_to : Plug
