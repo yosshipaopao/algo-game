@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://e8nx3rkdsssn"]
+
+[ext_resource type="PackedScene" uid="uid://dwb5ifuh8tu4p" path="res://BlockBase/Block.tscn" id="1_tj8i2"]
+[ext_resource type="PackedScene" uid="uid://hj4jdn7rwud5" path="res://BlockBase/BlockPort.tscn" id="2_51lf8"]
+[ext_resource type="PackedScene" uid="uid://dtaob72r7g2y6" path="res://BlockBase/BlockPlug.tscn" id="3_ye6bs"]
+
+[node name="Block" instance=ExtResource("1_tj8i2")]
+
+[node name="Label" type="Label" parent="Container/Control" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Assign"
+horizontal_alignment = 1
+
+[node name="ProcessPort" parent="." index="1" instance=ExtResource("2_51lf8")]
+position = Vector2(0, -65)
+plug_mode = 1
+
+[node name="ProcessPlug" parent="." index="2" instance=ExtResource("3_ye6bs")]
+position = Vector2(0, 65)
+plug_mode = 1
+
+[node name="VariablePort" parent="." index="3" instance=ExtResource("2_51lf8")]
+position = Vector2(-65, -33)
+
+[node name="ValuePort" parent="." index="4" instance=ExtResource("2_51lf8")]
+position = Vector2(-65, 33)

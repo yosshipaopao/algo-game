@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://7qvr1nkvbn0v"]
+
+[ext_resource type="PackedScene" uid="uid://dwb5ifuh8tu4p" path="res://BlockBase/Block.tscn" id="1_im3gv"]
+[ext_resource type="PackedScene" uid="uid://dtaob72r7g2y6" path="res://BlockBase/BlockPlug.tscn" id="2_3r368"]
+[ext_resource type="PackedScene" uid="uid://hj4jdn7rwud5" path="res://BlockBase/BlockPort.tscn" id="2_k2mpa"]
+
+[node name="For" instance=ExtResource("1_im3gv")]
+
+[node name="Label" type="Label" parent="Container/Control" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "For"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProcessPort" parent="." index="1" instance=ExtResource("2_k2mpa")]
+position = Vector2(0, -65)
+plug_mode = 1
+
+[node name="CountPort" parent="." index="2" instance=ExtResource("2_k2mpa")]
+
+[node name="LoopPlug" parent="." index="3" instance=ExtResource("2_3r368")]
+position = Vector2(-33, 65)
+plug_mode = 1
+
+[node name="EndPlug" parent="." index="4" instance=ExtResource("2_3r368")]
+position = Vector2(33, 65)
+plug_mode = 1
